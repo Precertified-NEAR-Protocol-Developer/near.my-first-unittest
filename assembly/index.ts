@@ -1,24 +1,30 @@
 import { storage, logging } from "near-sdk-as";
 
 // --- contract code goes below
+export class Counter {
+  constructor(private storageName: string) {
+    this.storageName = storageName;
+  }
+  incrementCounter(value: i32): void {
+    this.setStorage(this.getCurrentCounterValue() + value);
+  }
 
-export function incrementCounter(value: i32): void {
-  const newCounter = storage.getPrimitive<i32>("counter", 0) + value;
-  storage.set<i32>("counter", newCounter);
-  logging.log("Counter is now: " + newCounter.toString());
-}
+  decrementCounter(value: i32): void {
+    this.setStorage(this.getCurrentCounterValue() - value);
+  }
 
-export function decrementCounter(value: i32): void {
-  const newCounter = storage.getPrimitive<i32>("counter", 0) - value;
-  storage.set<i32>("counter", newCounter);
-  logging.log("Counter is now: " + newCounter.toString());
-}
+  getCurrentCounterValue(): i32 {
+    return storage.getPrimitive<i32>(this.storageName, 0);
+  }
 
-export function getCounter(): i32 {
-  return storage.getPrimitive<i32>("counter", 0);
-}
+  resetCounter(): void {
+    this.setStorage(0);
+    logging.log("Counter is reset!");
+  }
 
-export function resetCounter(): void {
-  storage.set<i32>("counter", 0);
-  logging.log("Counter is reset!");
+  private setStorage(value: i32): void {
+    storage.set<i32>(this.storageName, value)
+    const currentCounterValue = this.getCurrentCounterValue();
+    logging.log("Counter has value of [ " + currentCounterValue.toString() + " ]");
+  }
 }
