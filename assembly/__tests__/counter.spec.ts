@@ -59,19 +59,19 @@ class TestImplementation {
     }
 }
 
-const testImplementation = new TestImplementation("counter");
+const testImplemenation = new TestImplementation("counter");
 
 describe("Counter ", () => {
     it("should increment by one", () => {
-        testImplementation.counterIncrementTest(1);
+        testImplemenation.counterIncrementTest(1);
     });
 
     it("should decrement by one", () => {
-        testImplementation.counterDecrementTest(1);
+        testImplemenation.counterDecrementTest(1);
     });
 
     it("should be resetable", () => {
-        testImplementation.counterResetTest(0, 100);
+        testImplemenation.counterResetTest(0, 100);
     });
 });
 
