@@ -1,10 +1,11 @@
 import { storage, logging } from "near-sdk-as";
 
-// --- contract code goes below
+@nearBindgen
 export class Counter {
   constructor(private storageName: string) {
     this.storageName = storageName;
   }
+  
   decrementCounter(value: i32): void {
     this.incrementCounter(-value);
   }
