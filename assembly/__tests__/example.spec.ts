@@ -2,30 +2,36 @@ import { Counter } from '../index';
 
 import { context, storage, VMContext } from 'near-sdk-as';
 
+// given
+class TestImplementation {
+    private counter:Counter;
 
-describe("Counter ", () => {
+    constructor(counterName:string){
+        this.counter = new Counter(counterName);
+    }
 
-    // given
-    const counterIncrementTest = (counterName: string, incrementValue: i32): void => {    
-        const counter = new Counter(counterName);
+    counterIncrementTest(incrementValue: i32): void {
+        const preIncrementValue = this.counter.getCurrentCounterValue();
+        const expectedPostIncrementValue = preIncrementValue + incrementValue;
 
         // when
-        counter.incrementCounter(incrementValue);
-
+        this.counter.incrementCounter(incrementValue);
+        const actualPostIncrementValue = this.counter.getCurrentCounterValue();
+    
         // then
-        expect(counter.getCurrentCounterValue()).toBe(incrementValue, "counter should be one after a single increment.");
+        const assertionMessage = "Value before increment was [ ${preIncrementValue} ]\n"
+            .concat("Value to increment by was [ ${incrementValue} ]\n")
+            .concat("Value expected after increment was [ ${expectedPostIncrementValue} ]\n")
+            .concat("Value after increment was [ ${actualPostIncrementValue} ]");
+        expect(actualPostIncrementValue).toBe(incrementValue, assertionMessage);
     };
+}
 
+const testImplementation = new TestImplementation("counter");
+
+describe("Counter ", () => {
     it("should increment by one", () => {
-        const counter = new Counter("counter");
-        counter.incrementCounter(1);
-        counter.decrementCounter(1);
-        expect(counter.getCurrentCounterValue()).toBe(0, "counter should be zero after a single decrement.");
-    });
-
-    it("getCounter is the same as reading from storage", () => {
-        const counter = new Counter("counter");
-        expect(storage.getPrimitive<i32>("counter", 0)).toBe(counter.getCurrentCounterValue(), "storage.getPrimitive<i32>(\"counter\", 0) = counter.getCurrentCounterValue()");
+        testImplementation.counterIncrementTest(1);
     });
 
     it("should decrement by one", () => {
