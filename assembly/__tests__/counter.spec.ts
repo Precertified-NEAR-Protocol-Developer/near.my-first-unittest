@@ -22,10 +22,10 @@ class TestImplementation {
         const actualPostIncrementValue = this.counter.getCurrentCounterValue();
     
         // then
-        const assertionMessage = `Value before increment was [ ${preIncrementValue} ]\n`
-            .concat(`Value to increment by was [ ${incrementValue} ]\n`)
-            .concat(`Value expected after increment was [ ${expectedPostIncrementValue} ]\n`)
-            .concat(`Value after increment was [ ${actualPostIncrementValue} ]`);
+        const assertionMessage = `\nValue before increment was [ ${preIncrementValue} ]`
+            .concat(`\nValue to increment by was [ ${incrementValue} ]`)
+            .concat(`\nValue expected after increment was [ ${expectedPostIncrementValue} ]`)
+            .concat(`\nValue after increment was [ ${actualPostIncrementValue} ]`);
         expect(actualPostIncrementValue).toBe(incrementValue, assertionMessage);
     };
 
@@ -40,10 +40,10 @@ class TestImplementation {
         const actualPostDecrementValue = this.counter.getCurrentCounterValue();
     
         // then
-        const assertionMessage = `Value before decrement was [ ${preDecrementValue} ]\n`
-            .concat(`Value to decrement by was [ ${decrementValue} ]\n`)
-            .concat(`Value expected after decrement was [ ${expectedPostDecrementValue} ]\n`)
-            .concat(`Value after decrement was [ ${actualPostDecrementValue} ]`);
+        const assertionMessage = `\nValue before decrement was [ ${preDecrementValue} ]`
+            .concat(`\nValue to decrement by was [ ${decrementValue} ]`)
+            .concat(`\nValue expected after decrement was [ ${expectedPostDecrementValue} ]`)
+            .concat(`\nValue after decrement was [ ${actualPostDecrementValue} ]`);
         expect(actualPostDecrementValue).toBe(expectedPostDecrementValue, assertionMessage);
     };
 
