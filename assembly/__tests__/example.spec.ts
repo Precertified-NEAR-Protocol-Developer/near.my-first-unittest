@@ -2,11 +2,25 @@ import { Counter } from '../index';
 
 import { context, storage, VMContext } from 'near-sdk-as';
 
+
 describe("Counter ", () => {
+
+    // given
+    const counterIncrementTest = (counterName: string, incrementValue: i32): void => {    
+        const counter = new Counter(counterName);
+
+        // when
+        counter.incrementCounter(incrementValue);
+
+        // then
+        expect(counter.getCurrentCounterValue()).toBe(incrementValue, "counter should be one after a single increment.");
+    };
+
     it("should increment by one", () => {
         const counter = new Counter("counter");
         counter.incrementCounter(1);
-        expect(counter.getCurrentCounterValue()).toBe(1, "counter should be one after a single increment.");
+        counter.decrementCounter(1);
+        expect(counter.getCurrentCounterValue()).toBe(0, "counter should be zero after a single decrement.");
     });
 
     it("getCounter is the same as reading from storage", () => {
