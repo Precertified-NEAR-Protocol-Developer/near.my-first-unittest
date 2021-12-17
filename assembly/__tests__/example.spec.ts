@@ -74,3 +74,10 @@ describe("Counter ", () => {
         testImplementation.counterResetTest(0, 100);
     });
 });
+
+describe("Context contract name", () => {
+    
+    it("should be eve's account", () => {
+        expect(context.contractName).toBe("eve");
+    });
+});
