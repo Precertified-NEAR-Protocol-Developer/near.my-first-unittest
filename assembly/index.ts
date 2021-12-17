@@ -5,12 +5,12 @@ export class Counter {
   constructor(private storageName: string) {
     this.storageName = storageName;
   }
-  incrementCounter(value: i32): void {
-    this.setStorage(this.getCurrentCounterValue() + value);
+  decrementCounter(value: i32): void {
+    this.incrementCounter(-value);
   }
 
-  decrementCounter(value: i32): void {
-    this.setStorage(this.getCurrentCounterValue() - value);
+  incrementCounter(value: i32): void {
+    this.setStorage(this.getCurrentCounterValue() + value);
   }
 
   getCurrentCounterValue(): i32 {
@@ -25,6 +25,6 @@ export class Counter {
   private setStorage(value: i32): void {
     storage.set<i32>(this.storageName, value)
     const currentCounterValue = this.getCurrentCounterValue();
-    logging.log("Counter has value of [ " + currentCounterValue.toString() + " ]");
+    logging.log(`Counter has value of [ ${currentCounterValue} ]`);
   }
 }
