@@ -2,6 +2,9 @@ import { Counter } from '../index';
 
 import { context, storage, VMContext } from 'near-sdk-as';
 
+
+const getRandomNumber = (_min: number, _max: number): i32 => <i32>(Math.random() * (_max - _min) + _min);
+
 class TestImplementation {
     private counter:Counter;
 
@@ -46,7 +49,6 @@ class TestImplementation {
 
     // given
     counterResetTest(min: number, max: number): void {
-        const getRandomNumber = (_min: number, _max: number): i32 => <i32>(Math.random() * (_max - _min) + _min);
         this.counter.decrementCounter(getRandomNumber(min, max));
         this.counter.incrementCounter(getRandomNumber(min, max));
 
@@ -62,12 +64,12 @@ class TestImplementation {
 const testImplemenation = new TestImplementation("counter");
 
 describe("Counter ", () => {
-    it("should increment by one", () => {
-        testImplemenation.counterIncrementTest(1);
+    it("should increment", () => {
+        testImplemenation.counterIncrementTest(getRandomNumber(0, 100));
     });
 
-    it("should decrement by one", () => {
-        testImplemenation.counterDecrementTest(1);
+    it("should decrement", () => {
+        testImplemenation.counterDecrementTest(getRandomNumber(0, 100));
     });
 
     it("should be resetable", () => {
