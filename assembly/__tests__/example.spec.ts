@@ -46,9 +46,9 @@ class TestImplementation {
 
     // given
     counterResetTest(min: number, max: number): void {
-        const randomValue = (_min: number, _max: number): i32 => <i32>(Math.random() * (_max - _min) + _min);
-        this.counter.decrementCounter(randomValue(min, max));
-        this.counter.incrementCounter(randomValue(min, max));
+        const getRandomNumber = (_min: number, _max: number): i32 => <i32>(Math.random() * (_max - _min) + _min);
+        this.counter.decrementCounter(getRandomNumber(min, max));
+        this.counter.incrementCounter(getRandomNumber(min, max));
 
         // when
         this.counter.resetCounter();
