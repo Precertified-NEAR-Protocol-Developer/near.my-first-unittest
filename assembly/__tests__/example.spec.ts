@@ -1,9 +1,7 @@
-import { getHello, DEFAULT_MESSAGE } from '..'
-
 describe("example", () => {
 
   it("should work correctly", () => {
-    const expected = DEFAULT_MESSAGE;
-    expect(getHello()).toBe(expected);
+      const expected = "artbitrary value"
+    expect(expected).toBe(expected);
   });
 });

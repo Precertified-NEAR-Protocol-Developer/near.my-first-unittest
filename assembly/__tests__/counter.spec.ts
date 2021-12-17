@@ -20,6 +20,7 @@ describe("counter", () => {
   it("should work as Single counter correctly", () => {
     expect(getCounter()).toBe(0)
 
+    
     incrementCounter(3)
     incrementCounter(2)
     expect(getCounter()).toBe(5)
